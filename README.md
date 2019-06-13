@@ -12,8 +12,8 @@ intersections.
 
 ### Description
 
-This program takes a file that has lines and calculates the angles, collision
-and intersection between them. Each row consists of two lines and each line
+This program takes a file that has lines and calculates the angles, collisions
+and intersections between them. Each row consists of two lines and each line
 is represented by four numbers.
 
 This is the format of the rows:
