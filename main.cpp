@@ -7,7 +7,6 @@ using namespace std;
 
 // struct that represents a point
 struct Point {
-
   double x, y;
 
   Point()
@@ -19,7 +18,6 @@ struct Point {
   void set(const double xPos, const double yPos)
   { x = xPos;
     y = yPos; }
-
 };
 
 // calculates the distance between two points
@@ -36,13 +34,9 @@ const double vectorAngle(const Point p1, const Point p2,
   const double m1 = sqrt(dx1 * dx1 + dy1 * dy1);
   const double m2 = sqrt(dx2 * dx2 + dy2 * dy2);
   const double temp = (dx1 * dx2 + dy1 * dy2) / (m1 * m2);
-//  cout << "temp = " << temp << endl;
+  // cout << "temp = " << temp << endl;
   const double angle = acos(temp) * (180 / acos(-1));
   return (dy1 < dy2) ? angle + 180 : angle; }
-
-// calculates the angle of a line with respect to the origin
-const double angle_from_origin(const Point p1, const Point p2)
-{ vectorAngle(p1, p2, Point(0, 0), Point(0, 1)); }
 
 // checks to see if two lines collide
 // the inter parameter returns the point of intersection
@@ -71,14 +65,25 @@ double originAngle(Point p1, Point p2)
     angl += 180;
   else if
     (dy < 0) angl += 360;
-  cout << "angle = " << angl << endl;
+  // cout << "angle = " << angl << endl;
   return angl; }
 
 // calculates the angle between two lines
-void lineAngle(Point p1, Point p2, Point p3, Point p4)
+double lineAngle(Point p1, Point p2, Point p3, Point p4)
 { double angl1 = originAngle(p1, p2);
   double angl2 = originAngle(p3, p4);
-  cout << "line angle = " << (angl1 - angl2) << endl; }
+  double angl  = angl1 - angl2;
+  return (angl < 0)? 360 + angl : angl; }
+
+void print(Point p1, Point p2, Point p3, Point p4)
+{ cout << "\n--------------------------------------------------\n";
+  cout << "line1 originAngle = " << originAngle(p1, p2) << endl;
+  cout << "line2 originAngle = " << originAngle(p3, p4) << endl;
+  cout << "lineAngle         = " << lineAngle(p1, p2, p3, p4) << endl;
+  cout << "vectorAngle       = " << vectorAngle(p1, p2, p3, p4) << endl;
+  Point inter;
+  cout << "collision         = " << collision(p1, p2, p3, p4, inter) << endl;
+  cout << "intersection      = (" << inter.x << "," << inter.y << ")\n"; }
 
 // function that reads in a file and calculates the angle between each
 // of the two lines in each row
@@ -91,14 +96,12 @@ void testFileAngles(string fileName)
   while(true)
   { fin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
     if(fin.fail()) break;
-    lineAngle(Point(x1, y1), Point(x2, y2), Point(x3, y3), Point(x4, y4)); }
+    print(Point(x1, y1), Point(x2, y2), Point(x3, y3), Point(x4, y4)); }
   fin.close(); }
 
 int main(int argc, char * argv[])
 { if(argc != 2)
   { cout<<"Usage: "<<argv[0]<<" <file-name>\n";
     return 0; }
-
-  cout << "line angle..................\n";
   testFileAngles(argv[1]);
   return 0; }
