@@ -1,5 +1,6 @@
 # angles-collisions-intersections
-Functions that calculate angles, collisions and intersections.
+A grouping of useful functions that calculate angles, collisions and
+intersections.
 
 ### Compilation
 
@@ -11,9 +12,9 @@ Functions that calculate angles, collisions and intersections.
 
 ### Description
 
-This program takes a file that has lines and calculates the angle between
-them. Each row consists of two lines and each line is represented by four
-numbers. 
+This program takes a file that has lines and calculates the angles, collision
+and intersection between them. Each row consists of two lines and each line
+is represented by four numbers.
 
 This is the format of the rows:
 
